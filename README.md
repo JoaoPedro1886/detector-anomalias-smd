@@ -7,11 +7,67 @@ Projeto Integrador da disciplina **Engenharia de Software para IA e Frameworks P
 
 ## Problema
 
-Detectar **comportamentos anômalos em execuções de sistemas computacionais a partir de
-métricas operacionais** (CPU, memória, latência etc.). A base de dados de referência é o
-**SMD — Server Machine Dataset** (OmniAnomaly). O objetivo é construir, com boas práticas
-de engenharia de software, um sistema de IA que carregue os dados, pré-processe e (nas
-próximas entregas) treine e avalie um modelo de detecção de anomalias.
+Sistemas computacionais modernos geram continuamente métricas operacionais, como uso
+de CPU, memória, disco, rede e outros indicadores de funcionamento. Em ambientes reais,
+mudanças inesperadas nessas métricas podem indicar falhas, degradação de desempenho,
+sobrecarga, mau funcionamento de serviços ou outros eventos que exigem investigação.
+
+O problema abordado neste projeto é a **detecção de comportamentos anômalos em séries
+temporais multivariadas de servidores**. A proposta é construir um sistema de Inteligência
+Artificial capaz de carregar métricas operacionais, pré-processar os dados e, nas próximas
+entregas, treinar e avaliar um modelo para identificar pontos ou períodos com comportamento
+incomum.
+
+Esse tipo de solução é relevante porque a identificação manual de anomalias em grandes
+volumes de métricas é custosa, sujeita a atrasos e dependente da experiência de quem
+monitora o sistema. Um detector automatizado pode apoiar equipes de operação, engenharia
+e observabilidade, apontando situações suspeitas que merecem análise.
+
+Nesta etapa inicial, o foco do projeto ainda não é entregar um modelo treinado, mas sim
+definir o problema, organizar a estrutura do repositório, documentar a base de dados
+pretendida e preparar as primeiras funções do pipeline.
+
+## Base de dados: SMD (Server Machine Dataset)
+
+A base de dados escolhida pelo grupo é o **SMD — Server Machine Dataset**, associado ao
+trabalho **OmniAnomaly**. O dataset está disponível publicamente no Kaggle em
+[SMD_OnmiAD](https://www.kaggle.com/datasets/mgusat/smd-onmiad) e também aparece na
+referência original do projeto
+[NetManAIOps/OmniAnomaly](https://github.com/NetManAIOps/OmniAnomaly).
+
+O SMD reúne métricas coletadas de servidores ao longo do tempo. Segundo a documentação
+do OmniAnomaly, o dataset possui dados de **28 máquinas**, organizadas em grupos de
+entidades nomeadas no formato `machine-<grupo>-<indice>`. Cada máquina contém séries
+temporais multivariadas com **38 dimensões** de métricas. A base foi construída para o
+problema de detecção de anomalias em dados operacionais de servidores.
+
+A organização da base inclui:
+
+- `train`: primeira metade da série temporal de cada máquina, usada para treinamento;
+- `test`: segunda metade da série temporal de cada máquina, usada para avaliação;
+- `test_label`: rótulos que indicam se cada ponto do conjunto de teste é normal ou anômalo;
+- `interpretation_label`: indicação das dimensões associadas às anomalias.
+
+Para manter o escopo viável durante a disciplina, a primeira versão do projeto deve trabalhar
+com um recorte controlado da base, por exemplo uma única máquina, antes de expandir para
+as 28 máquinas. Essa decisão reduz a complexidade inicial sem descaracterizar o problema,
+pois cada máquina do SMD já representa uma série temporal multivariada completa.
+
+O SMD é adequado ao escopo do projeto porque permite aplicar diretamente os requisitos da
+disciplina:
+
+- carregamento de dados a partir de arquivos;
+- limpeza e pré-processamento de séries temporais;
+- uso de NumPy para normalização, divisão e manipulação matricial;
+- uso futuro de PyTorch para treinamento de um modelo de detecção de anomalias;
+- avaliação experimental com métricas como precisão, revocação e F1-score;
+- modularização do pipeline em carregamento, pré-processamento, modelo, treinamento,
+  avaliação e inferência.
+
+Como limitação inicial, as métricas do SMD são anonimizadas. Isso significa que o projeto
+consegue estudar o comportamento numérico das séries e detectar anomalias, mas não deve
+prometer diagnósticos operacionais específicos, como identificar exatamente qual componente
+real do servidor falhou.
 
 > 📌 **Provisório:** tanto o **nome** do projeto quanto a escolha do **dataset SMD** e o
 > recorte do problema são uma proposta do grupo, **a ratificar na reunião de alinhamento**.
@@ -22,7 +78,7 @@ próximas entregas) treine e avalie um modelo de detecção de anomalias.
 
 ```
 .
-├── data/              # base de dados — SMD (a confirmar pela equipe)
+├── data/              # base de dados — SMD
 ├── src/
 │   ├── data/          # carregamento e limpeza (load_data, clean_data)
 │   ├── preprocessing/ # transformações NumPy (standardize, split_data)
@@ -64,7 +120,9 @@ python main.py
 
 | Entrega | Conteúdo | Status |
 |---------|----------|--------|
-| 1 | Escolha/contextualização do problema + funções iniciais | 🟡 Em andamento |
+| 1 | Descrição/contextualização do problema | ✅ Concluído |
+| 1 | Documentação da base de dados SMD | ✅ Concluído |
+| 1 | Funções iniciais | 🟡 Em andamento |
 | 1 | Modularização e organização do código | ✅ Concluído |
 | 1 | Tipagem (type hints) | ✅ Concluído |
 | 2 | Implementação em PyTorch (parte 1) + NumPy | ⬜ Pendente |
@@ -74,8 +132,9 @@ python main.py
 | 6 | Design/arquitetura + Git e colaboração | ⬜ Pendente |
 | Final | Apresentação | ⬜ Pendente |
 
-> Pendências da Entrega 1: **confirmar o nome** (hoje provisório), **ratificar o dataset
-> SMD** e implementar as **funções iniciais**. Repositório no GitHub em criação.
+> Pendências da Entrega 1: **confirmar o nome** (hoje provisório), definir o **recorte
+> inicial do SMD** que será usado no primeiro experimento e implementar as **funções
+> iniciais**. Repositório no GitHub em criação.
 
 ## Equipe
 
