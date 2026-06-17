@@ -9,15 +9,6 @@ from __future__ import annotations
 from typing import Tuple
 
 import numpy as np
-import pandas as pd
-
-
-def split_features_target(
-    data: pd.DataFrame,
-    target_column: str,
-) -> Tuple[np.ndarray, np.ndarray]:
-    """Separa os atributos (X) da coluna-alvo (y) a partir de um DataFrame."""
-    pass
 
 
 def standardize(X: np.ndarray) -> np.ndarray:

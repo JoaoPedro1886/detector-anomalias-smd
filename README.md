@@ -150,7 +150,6 @@ python main.py
 |--------|--------|------------------|
 | `load_data(path)` | `src/data/loader.py` | Carrega a base de dados (CSV). |
 | `clean_data(data)` | `src/data/loader.py` | Remove duplicatas e valores ausentes. |
-| `split_features_target(data, target_column)` | `src/preprocessing/transform.py` | Separa atributos (X) da coluna-alvo (y). |
 | `standardize(X)` | `src/preprocessing/transform.py` | Padroniza atributos (z-score). |
 | `split_data(X, y)` | `src/preprocessing/transform.py` | Divide em treino/teste. |
 | `main()` | `main.py` | Orquestra o pipeline. |
