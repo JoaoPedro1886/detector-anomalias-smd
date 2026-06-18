@@ -162,7 +162,7 @@ python main.py
 | `clean_data(data)` | `src/data/loader.py` | Remove duplicatas e valores ausentes. |
 | `standardize(X)` | `src/preprocessing/transform.py` | Padroniza atributos (z-score). |
 | `split_features_target(data, target_column)` | `src/preprocessing/transform.py` | Separa atributos e variavel alvo. |
-| `split_data(X, y)` | `src/preprocessing/transform.py` | Divide em treino/teste. |
+| `split_data(X, y)` | `src/preprocessing/transform.py` | Reserva o trecho final da serie para teste, em ordem temporal. |
 | `create_model()` | `src/models/model.py` | Cria e configura o modelo. |
 | `predict(model, X)` | `src/models/model.py` | Gera predicoes com o modelo treinado. |
 | `train_model(model, X_train, y_train)` | `src/training/train.py` | Executa a rotina de treinamento. |
