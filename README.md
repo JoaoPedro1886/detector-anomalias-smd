@@ -116,19 +116,29 @@ data/
 
 ```
 .
-├── data/              # base de dados — SMD
+├── data/                  # base de dados - SMD
+├── notebooks/             # experimentos e exploracao
 ├── src/
-│   ├── data/          # carregamento e limpeza (load_data, clean_data)
-│   ├── preprocessing/ # transformações NumPy (standardize, split_data)
-│   └── utils/         # configuração (constantes do pipeline)
-├── main.py            # ponto de entrada — orquestra o pipeline
+│   ├── data/
+│   │   └── loader.py      # carregamento e limpeza dos dados
+│   ├── preprocessing/
+│   │   └── transform.py   # transformacoes e split dos dados
+│   ├── models/
+│   │   └── model.py       # definicao do modelo
+│   ├── training/
+│   │   └── train.py       # rotina de treinamento
+│   ├── evaluation/
+│   │   └── metrics.py     # metricas de avaliacao
+│   └── utils/
+│       └── config.py      # configuracoes do pipeline
+├── main.py                # ponto de entrada do pipeline
 ├── requirements.txt
 └── README.md
 ```
 
 A estrutura segue a ideia de **separação de responsabilidades** e usa **type hints**
 nas funções (assinaturas e contratos definidos). A implementação das funções e os
-módulos de modelo, treino, avaliação e testes entram nas próximas entregas.
+módulos de testes entram nas próximas entregas.
 
 ## Como executar
 
@@ -151,7 +161,12 @@ python main.py
 | `load_data(path)` | `src/data/loader.py` | Carrega a base de dados (CSV). |
 | `clean_data(data)` | `src/data/loader.py` | Remove duplicatas e valores ausentes. |
 | `standardize(X)` | `src/preprocessing/transform.py` | Padroniza atributos (z-score). |
+| `split_features_target(data, target_column)` | `src/preprocessing/transform.py` | Separa atributos e variavel alvo. |
 | `split_data(X, y)` | `src/preprocessing/transform.py` | Divide em treino/teste. |
+| `create_model()` | `src/models/model.py` | Cria e configura o modelo. |
+| `predict(model, X)` | `src/models/model.py` | Gera predicoes com o modelo treinado. |
+| `train_model(model, X_train, y_train)` | `src/training/train.py` | Executa a rotina de treinamento. |
+| `calculate_metrics(y_true, y_pred)` | `src/evaluation/metrics.py` | Calcula metricas de avaliacao. |
 | `main()` | `main.py` | Orquestra o pipeline. |
 
 ## Status das etapas

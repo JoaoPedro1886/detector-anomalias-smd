@@ -9,10 +9,19 @@ from __future__ import annotations
 from typing import Tuple
 
 import numpy as np
+import pandas as pd
 
 
 def standardize(X: np.ndarray) -> np.ndarray:
     """Padroniza os atributos para média 0 e desvio-padrão 1 (z-score)."""
+    pass
+
+
+def split_features_target(
+    data: pd.DataFrame,
+    target_column: str,
+) -> Tuple[np.ndarray, np.ndarray]:
+    """Separa o DataFrame em atributos (X) e alvo (y)."""
     pass
 
 
