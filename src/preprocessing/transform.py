@@ -29,7 +29,6 @@ def split_data(
     X: np.ndarray,
     y: np.ndarray,
     test_size: float = 0.2,
-    seed: int = 42,
 ) -> Tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
-    """Divide os dados em conjuntos de treino e teste."""
+    """Reserva o trecho final da serie para teste, em ordem temporal."""
     pass
